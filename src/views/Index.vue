@@ -5,8 +5,11 @@
 </template>
 
 <script>
+import middleware from '@/middlewares/authenticated'
+
 export default {
   name: "HomePage",
-  layout: 'SimpleLayout',
+  layout: 'AdminLayout',
+  middlewares: { middleware }
 };
 </script>

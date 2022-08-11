@@ -1,4 +1,5 @@
 <template>
+  <div>status: {{ webPageStatus }}</div>
   <component :is="layout">
     <slot />
   </component>
@@ -8,6 +9,7 @@
 import SimpleLayout from "./SimpleLayout.vue";
 import { watch, ref } from "vue";
 import { useRoute } from "vue-router";
+import { mapGetters } from 'vuex'
 export default {
   name: "AppLayout",
   setup() {
@@ -20,7 +22,6 @@ export default {
           const component = await import(`@/layouts/${meta.layout}.vue`);
           layout.value = component?.default;
         } catch (e) {
-          console.log(e);
           layout.value = SimpleLayout;
         }
       },
@@ -28,5 +29,8 @@ export default {
     );
     return { layout };
   },
+  computed:{
+    ...mapGetters(['webPageStatus'])
+  }
 };
 </script>

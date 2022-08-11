@@ -1,4 +1,4 @@
-export default function ({ store, redirect }) {
-  console.log('store : ', store);
-  console.log('redirect : ', redirect);
+export default function ({ next, store }) {
+  if (!store || !store.getters.isAuthenticated) next({ path: '/login' })
+  else next()
 }
