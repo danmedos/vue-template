@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="loginPage">
     <h1>Login Page</h1>
-    <button @click="login">login</button>
+    <el-button type="primary" plain @click="login">login</el-button>
   </div>
 </template>
 
@@ -19,4 +19,8 @@ export default {
 </script>
 
 <style scoped>
+.loginPage {
+  background-color: aqua;
+  padding-top: 60px;
+}
 </style>

@@ -1,5 +1,4 @@
 <template>
-  <div>status: {{ webPageStatus }}</div>
   <component :is="layout">
     <slot />
   </component>
@@ -9,7 +8,8 @@
 import SimpleLayout from "./SimpleLayout.vue";
 import { watch, ref } from "vue";
 import { useRoute } from "vue-router";
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
+import { ElLoading } from 'element-plus'
 export default {
   name: "AppLayout",
   setup() {
@@ -29,8 +29,22 @@ export default {
     );
     return { layout };
   },
-  computed:{
-    ...mapGetters(['webPageStatus'])
+  data() {
+    return {
+      loadingDialog: undefined
+    }
+  },
+  computed: {
+    ...mapState(['loading'])
+  },
+  watch: {
+    loading(loading) {
+      if (loading) {
+        this.loadingDialog = ElLoading.service({ fullscreen: true })
+      } else if(this.loadingDialog) {
+        this.loadingDialog.close()
+      }
+    }
   }
 };
 </script>
